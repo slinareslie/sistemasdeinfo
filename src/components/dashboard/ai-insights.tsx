@@ -15,8 +15,8 @@ import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 
 const formSchema = z.object({
-  dataDescription: z.string().min(10, { message: "Please provide a detailed data description." }),
-  dataSample: z.string().min(20, { message: "Please provide a valid JSON data sample." }),
+  dataDescription: z.string().min(10, { message: "Por favor, proporciona una descripción detallada de los datos." }),
+  dataSample: z.string().min(20, { message: "Por favor, proporciona una muestra de datos JSON válida." }),
 });
 
 export default function AiInsights() {
@@ -38,8 +38,8 @@ export default function AiInsights() {
       const aiResult = await suggestMetrics(values);
       setResult(aiResult);
     } catch (error) {
-      console.error("AI Insight Error:", error);
-      // Here you would use a toast to show the error
+      console.error("Error en AI Insight:", error);
+      // Aquí usarías un toast para mostrar el error
     } finally {
       setIsLoading(false);
     }
@@ -50,9 +50,9 @@ export default function AiInsights() {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
             <Sparkles className="h-6 w-6 text-accent" />
-            <span>AI-Powered Insights</span>
+            <span>Ideas impulsadas por IA</span>
         </CardTitle>
-        <CardDescription>Let AI analyze your data and suggest new metrics and visualizations for your dashboard.</CardDescription>
+        <CardDescription>Deja que la IA analice tus datos y sugiera nuevas métricas y visualizaciones para tu dashboard.</CardDescription>
       </CardHeader>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -62,9 +62,9 @@ export default function AiInsights() {
               name="dataDescription"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Data Description</FormLabel>
+                  <FormLabel>Descripción de los Datos</FormLabel>
                   <FormControl>
-                    <Textarea placeholder="e.g., Monthly sales data from our e-commerce platform including product category, price, and region." {...field} />
+                    <Textarea placeholder="Ej: Datos de ventas mensuales de nuestra plataforma de e-commerce, incluyendo categoría de producto, precio y región." {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -75,9 +75,9 @@ export default function AiInsights() {
               name="dataSample"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Data Sample (JSON)</FormLabel>
+                  <FormLabel>Muestra de Datos (JSON)</FormLabel>
                   <FormControl>
-                    <Textarea placeholder='[{"product": "Laptop", "sales": 4500, "region": "North"}, ...]' {...field} rows={5} />
+                    <Textarea placeholder='[{"producto": "Laptop", "ventas": 4500, "region": "Norte"}, ...]' {...field} rows={5} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -87,9 +87,9 @@ export default function AiInsights() {
           <CardFooter>
             <Button type="submit" disabled={isLoading} className="w-full">
               {isLoading ? (
-                <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Analyzing...</>
+                <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Analizando...</>
               ) : (
-                <><Wand2 className="mr-2 h-4 w-4" /> Generate Suggestions</>
+                <><Wand2 className="mr-2 h-4 w-4" /> Generar Sugerencias</>
               )}
             </Button>
           </CardFooter>
@@ -99,9 +99,9 @@ export default function AiInsights() {
         <div className="p-6 pt-0">
           <Separator className="my-4" />
           <div className="space-y-4">
-              <h3 className="font-semibold">AI Suggestions</h3>
+              <h3 className="font-semibold">Sugerencias de la IA</h3>
               <div>
-                  <h4 className="font-medium text-sm mb-2">Suggested Metrics</h4>
+                  <h4 className="font-medium text-sm mb-2">Métricas Sugeridas</h4>
                   <div className="flex flex-wrap gap-2">
                       {result.suggestedMetrics.map((metric) => (
                           <Badge key={metric} variant="secondary">{metric}</Badge>
@@ -109,7 +109,7 @@ export default function AiInsights() {
                   </div>
               </div>
               <div>
-                  <h4 className="font-medium text-sm mb-2">Suggested Visualizations</h4>
+                  <h4 className="font-medium text-sm mb-2">Visualizaciones Sugeridas</h4>
                   <div className="flex flex-wrap gap-2">
                       {result.suggestedVisualizations.map((viz) => (
                           <Badge key={viz} variant="secondary">{viz}</Badge>
@@ -117,7 +117,7 @@ export default function AiInsights() {
                   </div>
               </div>
               <div>
-                  <h4 className="font-medium text-sm mb-2">Rationale</h4>
+                  <h4 className="font-medium text-sm mb-2">Justificación</h4>
                   <p className="text-sm text-muted-foreground">{result.rationale}</p>
               </div>
           </div>

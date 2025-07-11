@@ -4,9 +4,7 @@ import * as React from "react"
 import {
   Bell,
   BookText,
-  Cpu,
   DatabaseZap,
-  Home,
   LayoutDashboard,
   LineChart,
   Settings,
@@ -17,13 +15,11 @@ import {
   Sidebar,
   SidebarContent,
   SidebarHeader,
-  SidebarInset,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarProvider,
   SidebarTrigger,
-  useSidebar,
 } from "@/components/ui/sidebar"
 import {
   DropdownMenu,
@@ -43,14 +39,11 @@ import AiInsights from "@/components/dashboard/ai-insights"
 const mockUser = {
   name: "Sofia Diaz",
   email: "sofia.diaz@example.com",
-  role: "admin", // Change to 'viewer' to test role-based UI
+  role: "admin", // Cambia a 'viewer' para probar la interfaz basada en roles
   avatar: "https://placehold.co/100x100.png"
 };
 
 function MainNav() {
-  const { open } = useSidebar()
-  const activeClass = "bg-primary/10 text-primary hover:text-primary"
-
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -62,33 +55,33 @@ function MainNav() {
       <SidebarMenuItem>
         <SidebarMenuButton href="#">
           <DatabaseZap />
-          <span className="truncate">Data Sources</span>
+          <span className="truncate">Fuentes de Datos</span>
         </SidebarMenuButton>
       </SidebarMenuItem>
       <SidebarMenuItem>
         <SidebarMenuButton href="#">
           <Sparkles />
-          <span className="truncate">AI Insights</span>
+          <span className="truncate">Ideas con IA</span>
         </SidebarMenuButton>
       </SidebarMenuItem>
       <SidebarMenuItem>
         <SidebarMenuButton href="#">
           <BookText />
-          <span className="truncate">Reports</span>
+          <span className="truncate">Reportes</span>
         </SidebarMenuButton>
       </SidebarMenuItem>
       {mockUser.role === 'admin' && (
         <SidebarMenuItem>
           <SidebarMenuButton href="#">
             <Users />
-            <span className="truncate">User Management</span>
+            <span className="truncate">Gestión de Usuarios</span>
           </SidebarMenuButton>
         </SidebarMenuItem>
       )}
       <SidebarMenuItem>
         <SidebarMenuButton href="#">
           <Settings />
-          <span className="truncate">Settings</span>
+          <span className="truncate">Configuración</span>
         </SidebarMenuButton>
       </SidebarMenuItem>
     </SidebarMenu>
@@ -116,13 +109,13 @@ function UserMenu() {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Profile</DropdownMenuItem>
-        <DropdownMenuItem>Billing</DropdownMenuItem>
-        <DropdownMenuItem>Settings</DropdownMenuItem>
+        <DropdownMenuItem>Perfil</DropdownMenuItem>
+        <DropdownMenuItem>Facturación</DropdownMenuItem>
+        <DropdownMenuItem>Configuración</DropdownMenuItem>
         <DropdownMenuSeparator />
         <Link href="/login">
           <DropdownMenuItem>
-            Log out
+            Cerrar sesión
           </DropdownMenuItem>
         </Link>
       </DropdownMenuContent>
@@ -138,7 +131,7 @@ function Header() {
       <div className="ml-auto flex items-center gap-4">
         <Button variant="ghost" size="icon" className="rounded-full">
           <Bell className="h-5 w-5" />
-          <span className="sr-only">Toggle notifications</span>
+          <span className="sr-only">Ver notificaciones</span>
         </Button>
         <UserMenu />
       </div>
@@ -154,7 +147,7 @@ export default function DashboardPage() {
           <SidebarHeader>
             <div className="flex items-center gap-2 p-2">
               <LineChart className="h-8 w-8 text-primary" />
-              <span className="text-xl font-semibold font-headline">InsightFlow</span>
+              <span className="text-xl font-semibold">InsightFlow</span>
             </div>
           </SidebarHeader>
           <SidebarContent>
@@ -165,11 +158,11 @@ export default function DashboardPage() {
           <Header />
           <main className="flex-1 p-4 md:p-6 lg:p-8 bg-background">
             <div className="grid gap-6 lg:grid-cols-3">
-              <div className="lg:col-span-2">
+              <div className="lg:col-span-3">
                 <PowerBiEmbed />
               </div>
-              <div className="lg:col-span-1 space-y-6">
-                <DataUpload />
+              <div className="lg:col-span-3 grid md:grid-cols-2 gap-6">
+                {mockUser.role === 'admin' && <DataUpload /> }
                 <AiInsights />
               </div>
             </div>

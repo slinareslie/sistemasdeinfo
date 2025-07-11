@@ -5,11 +5,11 @@ export default function PowerBiEmbed() {
   return (
     <Card className="h-full shadow-lg transition-all hover:shadow-xl">
       <CardHeader>
-        <CardTitle>Sales & Performance Dashboard</CardTitle>
-        <CardDescription>Interactive real-time data from Power BI.</CardDescription>
+        <CardTitle>Dashboard de Ventas y Rendimiento</CardTitle>
+        <CardDescription>Datos interactivos en tiempo real desde Power BI.</CardDescription>
       </CardHeader>
       <CardContent>
-        <AspectRatio ratio={16 / 9}>
+        <AspectRatio ratio={16 / 9} className="bg-muted rounded-md">
           <iframe
             title="Power BI Dashboard"
             className="w-full h-full rounded-md border"
