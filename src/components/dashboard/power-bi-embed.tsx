@@ -6,7 +6,7 @@ import { Info } from "lucide-react"
 // IMPORTANTE: Reemplaza esta URL con la URL de tu dashboard de Power BI publicado.
 // Para obtener la URL, publica tu archivo .pbix en el servicio de Power BI y luego
 // ve a Archivo > Insertar informe > Publicar en la web (público) o Insertar.
-const POWER_BI_EMBED_URL = "https://app.powerbi.com/view?r=eyJrIjoiYjM4YjRjZDgtNTRhZC00MTI3LTg5MGMtYTg0NDE4ZWY2YjA0IiwidCI6IjMyZDFmYjJmLWM3NTQtNGJkNy04YjJkLTMxM2Y2Y2JkMzM2ZSIsImMiOjZ9";
+const POWER_BI_EMBED_URL = "https://app.powerbi.com/view?r=eyJrIjoiNjI0YzBmZWEtZDljOC00ODEyLThkN2UtMjM3YTI4MjMwYmQzIiwidCI6ImNhMTM5MDUwLWNmYjQtNDUyNy05YmMzLTcyOWZiNTRhYzEzOCJ9";
 
 export default function PowerBiEmbed() {
   return (

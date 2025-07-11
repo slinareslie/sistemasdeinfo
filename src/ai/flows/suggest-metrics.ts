@@ -14,7 +14,7 @@ import {z} from 'genkit';
 const SuggestMetricsInputSchema = z.object({
   dataDescription: z
     .string()
-    .describe('A description of the data, including its source and structure.'),
+    .describe('Una descripción de los datos, incluyendo su fuente y estructura.'),
   dataSample: z.string().describe('A sample of the data in JSON format.'),
 });
 export type SuggestMetricsInput = z.infer<typeof SuggestMetricsInputSchema>;
@@ -22,14 +22,14 @@ export type SuggestMetricsInput = z.infer<typeof SuggestMetricsInputSchema>;
 const SuggestMetricsOutputSchema = z.object({
   suggestedMetrics: z
     .array(z.string())
-    .describe('A list of suggested metrics based on the data.'),
+    .describe('Una lista de métricas de marketing sugeridas basadas en los datos.'),
   suggestedVisualizations: z
     .array(z.string())
-    .describe('A list of suggested visualizations for the data.'),
+    .describe('Una lista de visualizaciones sugeridas para el análisis de marketing.'),
   rationale: z
     .string()
     .describe(
-      'A rationale explaining why these metrics and visualizations are appropriate for the data.'
+      'Una justificación explicando cómo estas métricas y visualizaciones pueden ayudar a optimizar las estrategias de marketing.'
     ),
 });
 export type SuggestMetricsOutput = z.infer<typeof SuggestMetricsOutputSchema>;
@@ -42,20 +42,18 @@ const prompt = ai.definePrompt({
   name: 'suggestMetricsPrompt',
   input: {schema: SuggestMetricsInputSchema},
   output: {schema: SuggestMetricsOutputSchema},
-  prompt: `You are an expert data analyst. Analyze the provided data description and sample, and suggest relevant metrics and visualizations that would be appropriate for a dashboard.
+  prompt: `Eres un experto en marketing digital y análisis de datos. Tu objetivo es analizar la descripción y muestra de datos proporcionada para ofrecer recomendaciones de marketing accionables en español.
 
-Data Description: {{{dataDescription}}}
+Datos del Usuario:
+Descripción: {{{dataDescription}}}
+Muestra JSON: {{{dataSample}}}
 
-Data Sample: {{{dataSample}}}
+Basado en estos datos, proporciona lo siguiente:
+1.  **Métricas de Marketing Sugeridas**: Identifica y lista las métricas de marketing más relevantes que se pueden derivar de los datos.
+2.  **Visualizaciones de Marketing Sugeridas**: Propón los tipos de gráficos o visualizaciones que mejor representarían estas métricas para un análisis de marketing efectivo.
+3.  **Justificación**: Explica de manera concisa por qué estas métricas y visualizaciones son importantes y cómo pueden ayudar al usuario a tomar mejores decisiones de marketing (por ejemplo, segmentación de clientes, optimización de campañas, etc.).
 
-Provide a rationale for your suggestions.
-
-Format your response as a JSON object conforming to the following schema:
-\{
-  "suggestedMetrics": string[],
-  "suggestedVisualizations": string[],
-  "rationale": string
-\}
+Asegúrate de que toda tu respuesta esté en español.
 `,
 });
 
