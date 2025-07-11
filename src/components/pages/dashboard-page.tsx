@@ -35,6 +35,7 @@ import Link from "next/link"
 import PowerBiEmbed from "@/components/dashboard/power-bi-embed"
 import DataUpload from "@/components/dashboard/data-upload"
 import AiInsights from "@/components/dashboard/ai-insights"
+import { usePathname } from "next/navigation"
 
 const mockUser = {
   name: "Sofia Diaz",
@@ -44,42 +45,43 @@ const mockUser = {
 };
 
 function MainNav() {
+  const pathname = usePathname();
   return (
     <SidebarMenu>
       <SidebarMenuItem>
-        <SidebarMenuButton href="/" isActive>
+        <SidebarMenuButton href="/" isActive={pathname === '/'}>
           <LayoutDashboard />
           <span className="truncate">Dashboard</span>
         </SidebarMenuButton>
       </SidebarMenuItem>
       <SidebarMenuItem>
-        <SidebarMenuButton href="#">
+        <SidebarMenuButton href="/data-sources" isActive={pathname === '/data-sources'}>
           <DatabaseZap />
           <span className="truncate">Fuentes de Datos</span>
         </SidebarMenuButton>
       </SidebarMenuItem>
       <SidebarMenuItem>
-        <SidebarMenuButton href="#">
+        <SidebarMenuButton href="/ai-insights" isActive={pathname === '/ai-insights'}>
           <Sparkles />
           <span className="truncate">Ideas con IA</span>
         </SidebarMenuButton>
       </SidebarMenuItem>
       <SidebarMenuItem>
-        <SidebarMenuButton href="#">
+        <SidebarMenuButton href="/reports" isActive={pathname === '/reports'}>
           <BookText />
           <span className="truncate">Reportes</span>
         </SidebarMenuButton>
       </SidebarMenuItem>
       {mockUser.role === 'admin' && (
         <SidebarMenuItem>
-          <SidebarMenuButton href="#">
+          <SidebarMenuButton href="/user-management" isActive={pathname === '/user-management'}>
             <Users />
             <span className="truncate">Gestión de Usuarios</span>
           </SidebarMenuButton>
         </SidebarMenuItem>
       )}
       <SidebarMenuItem>
-        <SidebarMenuButton href="#">
+        <SidebarMenuButton href="/settings" isActive={pathname === '/settings'}>
           <Settings />
           <span className="truncate">Configuración</span>
         </SidebarMenuButton>
@@ -123,11 +125,11 @@ function UserMenu() {
   )
 }
 
-function Header() {
+function Header({title}: {title: string}) {
   return (
     <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background/80 backdrop-blur-sm px-4 md:px-6">
       <SidebarTrigger className="md:hidden" />
-      <h1 className="text-lg font-semibold md:text-2xl">Dashboard</h1>
+      <h1 className="text-lg font-semibold md:text-2xl">{title}</h1>
       <div className="ml-auto flex items-center gap-4">
         <Button variant="ghost" size="icon" className="rounded-full">
           <Bell className="h-5 w-5" />
@@ -139,9 +141,10 @@ function Header() {
   )
 }
 
-export default function DashboardPage() {
+
+export function DashboardLayout({ children, title }: { children: React.ReactNode, title: string }) {
   return (
-    <SidebarProvider>
+     <SidebarProvider>
       <div className="flex min-h-screen w-full">
         <Sidebar>
           <SidebarHeader>
@@ -155,20 +158,29 @@ export default function DashboardPage() {
           </SidebarContent>
         </Sidebar>
         <div className="flex flex-col flex-1">
-          <Header />
+          <Header title={title}/>
           <main className="flex-1 p-4 md:p-6 lg:p-8 bg-background">
-            <div className="grid gap-6 lg:grid-cols-3">
-              <div className="lg:col-span-3">
-                <PowerBiEmbed />
-              </div>
-              <div className="lg:col-span-3 grid md:grid-cols-2 gap-6">
-                {mockUser.role === 'admin' && <DataUpload /> }
-                <AiInsights />
-              </div>
-            </div>
+            {children}
           </main>
         </div>
       </div>
     </SidebarProvider>
+  )
+}
+
+
+export default function DashboardPage() {
+  return (
+    <DashboardLayout title="Dashboard">
+      <div className="grid gap-6 lg:grid-cols-3">
+        <div className="lg:col-span-3">
+          <PowerBiEmbed />
+        </div>
+        <div className="lg:col-span-3 grid md:grid-cols-2 gap-6">
+          {mockUser.role === 'admin' && <DataUpload /> }
+          <AiInsights />
+        </div>
+      </div>
+    </DashboardLayout>
   )
 }
