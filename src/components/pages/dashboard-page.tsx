@@ -111,9 +111,17 @@ function UserMenu() {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Perfil</DropdownMenuItem>
+        <Link href="/settings">
+          <DropdownMenuItem>
+            Perfil
+          </DropdownMenuItem>
+        </Link>
         <DropdownMenuItem>Facturación</DropdownMenuItem>
-        <DropdownMenuItem>Configuración</DropdownMenuItem>
+        <Link href="/settings">
+          <DropdownMenuItem>
+            Configuración
+          </DropdownMenuItem>
+        </Link>
         <DropdownMenuSeparator />
         <Link href="/login">
           <DropdownMenuItem>

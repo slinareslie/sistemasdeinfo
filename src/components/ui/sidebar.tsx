@@ -557,11 +557,10 @@ const SidebarMenuButton = React.forwardRef<
     },
     ref
   ) => {
-    const Comp = asChild ? Slot : "button"
     const { isMobile, state } = useSidebar()
 
     const button = (
-      <Comp
+      <button
         ref={ref}
         data-sidebar="menu-button"
         data-size={size}
@@ -570,10 +569,10 @@ const SidebarMenuButton = React.forwardRef<
         {...props}
       >
         {children}
-      </Comp>
+      </button>
     )
 
-    const content = href ? <Link href={href} legacyBehavior passHref><a>{button}</a></Link> : button;
+    const content = href ? <Link href={href}>{button}</Link> : button;
 
     if (!tooltip) {
       return content
