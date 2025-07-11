@@ -14,8 +14,7 @@ import {z} from 'genkit';
 const SuggestMetricsInputSchema = z.object({
   dataDescription: z
     .string()
-    .describe('Una descripción de los datos, incluyendo su fuente y estructura.'),
-  dataSample: z.string().describe('A sample of the data in JSON format.'),
+    .describe('Una descripción en lenguaje natural de los datos del usuario y lo que le gustaría analizar.'),
 });
 export type SuggestMetricsInput = z.infer<typeof SuggestMetricsInputSchema>;
 
@@ -42,14 +41,13 @@ const prompt = ai.definePrompt({
   name: 'suggestMetricsPrompt',
   input: {schema: SuggestMetricsInputSchema},
   output: {schema: SuggestMetricsOutputSchema},
-  prompt: `Eres un experto en marketing digital y análisis de datos. Tu objetivo es analizar la descripción y muestra de datos proporcionada para ofrecer recomendaciones de marketing accionables en español.
+  prompt: `Eres un experto en marketing digital y análisis de datos. Tu objetivo es analizar la descripción de datos proporcionada por el usuario para ofrecer recomendaciones de marketing accionables en español.
 
-Datos del Usuario:
-Descripción: {{{dataDescription}}}
-Muestra JSON: {{{dataSample}}}
+Descripción del Usuario:
+"{{{dataDescription}}}"
 
-Basado en estos datos, proporciona lo siguiente:
-1.  **Métricas de Marketing Sugeridas**: Identifica y lista las métricas de marketing más relevantes que se pueden derivar de los datos.
+Basado en esta descripción, proporciona lo siguiente:
+1.  **Métricas de Marketing Sugeridas**: Identifica y lista las métricas de marketing más relevantes que se podrían derivar de los datos descritos.
 2.  **Visualizaciones de Marketing Sugeridas**: Propón los tipos de gráficos o visualizaciones que mejor representarían estas métricas para un análisis de marketing efectivo.
 3.  **Justificación**: Explica de manera concisa por qué estas métricas y visualizaciones son importantes y cómo pueden ayudar al usuario a tomar mejores decisiones de marketing (por ejemplo, segmentación de clientes, optimización de campañas, etc.).
 

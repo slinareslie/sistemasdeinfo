@@ -13,21 +13,21 @@ import { Button } from "@/components/ui/button"
 import { suggestMetrics, type SuggestMetricsOutput } from "@/ai/flows/suggest-metrics"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
+import { useToast } from "@/hooks/use-toast"
 
 const formSchema = z.object({
-  dataDescription: z.string().min(10, { message: "Por favor, proporciona una descripción detallada de los datos." }),
-  dataSample: z.string().min(20, { message: "Por favor, proporciona una muestra de datos JSON válida." }),
+  dataDescription: z.string().min(10, { message: "Por favor, proporciona una descripción detallada de tus datos." }),
 });
 
 export default function AiInsights() {
   const [result, setResult] = React.useState<SuggestMetricsOutput | null>(null);
   const [isLoading, setIsLoading] = React.useState(false);
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       dataDescription: "",
-      dataSample: "",
     },
   });
 
@@ -39,20 +39,24 @@ export default function AiInsights() {
       setResult(aiResult);
     } catch (error) {
       console.error("Error en AI Insight:", error);
-      // Aquí usarías un toast para mostrar el error
+      toast({
+        variant: "destructive",
+        title: "Error al generar sugerencias",
+        description: "Hubo un problema al contactar a la IA. Por favor, inténtalo de nuevo más tarde.",
+      });
     } finally {
       setIsLoading(false);
     }
   }
 
   return (
-    <Card className="shadow-lg transition-all hover:shadow-xl">
+    <Card className="shadow-lg transition-all hover:shadow-xl w-full">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
             <Sparkles className="h-6 w-6 text-accent" />
             <span>Ideas impulsadas por IA</span>
         </CardTitle>
-        <CardDescription>Deja que la IA analice tus datos y sugiera nuevas métricas y visualizaciones para tu dashboard.</CardDescription>
+        <CardDescription>Describe tus datos y deja que la IA sugiera nuevas métricas y visualizaciones para tu dashboard.</CardDescription>
       </CardHeader>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -62,22 +66,13 @@ export default function AiInsights() {
               name="dataDescription"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Descripción de los Datos</FormLabel>
+                  <FormLabel>Describe tus datos</FormLabel>
                   <FormControl>
-                    <Textarea placeholder="Ej: Datos de ventas mensuales de nuestra plataforma de e-commerce, incluyendo categoría de producto, precio y región." {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="dataSample"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Muestra de Datos (JSON)</FormLabel>
-                  <FormControl>
-                    <Textarea placeholder='[{"producto": "Laptop", "ventas": 4500, "region": "Norte"}, ...]' {...field} rows={5} />
+                    <Textarea 
+                      placeholder="Ej: Tengo datos de ventas de e-commerce con producto, precio, fecha y ciudad. Quiero ideas para optimizar mis campañas de marketing." 
+                      {...field}
+                      rows={5}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

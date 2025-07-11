@@ -111,23 +111,17 @@ function UserMenu() {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <Link href="/settings">
-          <DropdownMenuItem>
-            Perfil
-          </DropdownMenuItem>
-        </Link>
+        <DropdownMenuItem asChild>
+          <Link href="/settings">Perfil</Link>
+        </DropdownMenuItem>
         <DropdownMenuItem>Facturación</DropdownMenuItem>
-        <Link href="/settings">
-          <DropdownMenuItem>
-            Configuración
-          </DropdownMenuItem>
-        </Link>
+        <DropdownMenuItem asChild>
+          <Link href="/settings">Configuración</Link>
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <Link href="/login">
-          <DropdownMenuItem>
-            Cerrar sesión
-          </DropdownMenuItem>
-        </Link>
+        <DropdownMenuItem asChild>
+          <Link href="/login">Cerrar sesión</Link>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )
@@ -180,11 +174,11 @@ export function DashboardLayout({ children, title }: { children: React.ReactNode
 export default function DashboardPage() {
   return (
     <DashboardLayout title="Dashboard">
-      <div className="grid gap-6 lg:grid-cols-3">
-        <div className="lg:col-span-3">
+      <div className="grid gap-6 lg:grid-cols-2">
+        <div className="lg:col-span-2">
           <PowerBiEmbed />
         </div>
-        <div className="lg:col-span-3 grid md:grid-cols-2 gap-6">
+        <div className="lg:col-span-2 grid md:grid-cols-2 gap-6 items-start">
           {mockUser.role === 'admin' && <DataUpload /> }
           <AiInsights />
         </div>
