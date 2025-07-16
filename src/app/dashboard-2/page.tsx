@@ -48,8 +48,13 @@ export default function Dashboard2Page() {
     } else {
       // Simulate filtering by reducing data randomly
       const randomFactor = 0.5 + Math.random() * 0.4; // between 0.5 and 0.9
+      
       const newFilteredData = {
-        ...initialData,
+        kpis: {
+            edad: { ...initialData.kpis.edad, avg: 25 + Math.random() * (80 - 25) },
+            ingreso: { ...initialData.kpis.ingreso, avg: 414 + Math.random() * (16000 - 414) },
+            saldo: { ...initialData.kpis.saldo, avg: 0 + Math.random() * (223150 - 0) },
+        },
         coberturaBase: Math.floor(initialData.coberturaBase * randomFactor),
         entidades: initialData.entidades.map(e => ({ ...e, value: Math.floor(e.value * randomFactor) })),
         cluster: initialData.cluster.map(c => ({ ...c, value: Math.floor(c.value * randomFactor) })),
