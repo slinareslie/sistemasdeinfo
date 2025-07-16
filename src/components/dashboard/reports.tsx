@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Button } from "@/components/ui/button";
 import { Download, FileText, PlusCircle } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import jsPDF from "jspdf";
 
 const reports = [
   {
@@ -23,7 +24,26 @@ const reports = [
   },
 ];
 
+type Report = typeof reports[0];
+
 export default function Reports() {
+  const handleDownload = (report: Report) => {
+    const doc = new jsPDF();
+
+    doc.setFontSize(18);
+    doc.text("Reporte de InsightFlow", 14, 22);
+
+    doc.setFontSize(12);
+    doc.text(`Nombre: ${report.name}`, 14, 40);
+    doc.text(`Fecha: ${report.date}`, 14, 50);
+    doc.text(`Autor: ${report.author}`, 14, 60);
+
+    doc.text("Este es un reporte generado automáticamente.", 14, 80);
+
+    const fileName = `${report.name.toLowerCase().replace(/\s/g, '_')}.pdf`;
+    doc.save(fileName);
+  };
+
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
@@ -60,9 +80,9 @@ export default function Reports() {
                   <TableCell>{report.date}</TableCell>
                   <TableCell>{report.author}</TableCell>
                   <TableCell className="text-right">
-                    <Button variant="outline" size="sm">
+                    <Button variant="outline" size="sm" onClick={() => handleDownload(report)}>
                       <Download className="mr-2 h-4 w-4" />
-                      Descargar
+                      Descargar PDF
                     </Button>
                   </TableCell>
                 </TableRow>
