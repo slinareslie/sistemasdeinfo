@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Info } from "lucide-react"
 
@@ -19,22 +18,22 @@ const PowerBiEmbed = React.forwardRef((props, ref) => {
   }));
 
   return (
-    <Card className="h-full shadow-lg transition-all hover:shadow-xl">
+    <Card className="h-full shadow-lg transition-all hover:shadow-xl flex flex-col">
       <CardHeader>
         <CardTitle>Dashboard de Ventas y Rendimiento</CardTitle>
         <CardDescription>Datos interactivos en tiempo real desde Power BI.</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex-grow">
         {POWER_BI_EMBED_URL ? (
-          <AspectRatio ratio={16 / 9} className="bg-muted rounded-md h-full">
+          <div className="relative w-full h-full pb-[56.25%]"> {/* Contenedor para la relación de aspecto 16:9 */}
             <iframe
               ref={iframeRef}
               title="Power BI Dashboard"
-              className="w-full h-full rounded-md border"
+              className="absolute top-0 left-0 w-full h-full rounded-md border"
               src={POWER_BI_EMBED_URL}
               allowFullScreen
             ></iframe>
-          </AspectRatio>
+          </div>
         ) : (
           <Alert>
             <Info className="h-4 w-4" />

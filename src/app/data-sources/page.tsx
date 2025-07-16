@@ -10,27 +10,9 @@ import { Badge } from "@/components/ui/badge";
 const dataSources = [
   {
     name: "Base de Datos de Ventas",
-    type: "Azure SQL",
+    type: "MySQL",
     status: "Conectado",
-    lastUpdate: "Hace 5 minutos",
-  },
-  {
-    name: "CRM de Clientes",
-    type: "Salesforce",
-    status: "Conectado",
-    lastUpdate: "Hace 1 hora",
-  },
-  {
-    name: "Google Analytics",
-    type: "Web Analytics",
-    status: "Conectado",
-    lastUpdate: "Hace 15 minutos",
-  },
-  {
-    name: "Hoja de Cálculo - Proyecciones",
-    type: "Excel Online",
-    status: "Error",
-    lastUpdate: "Ayer",
+    lastUpdate: "Hace 5 horas",
   },
 ];
 
