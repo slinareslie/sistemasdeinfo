@@ -57,9 +57,6 @@ export function KpiCards({ kpis }: KpiProps) {
         </CardHeader>
         <CardContent className="flex flex-col items-center justify-center pt-2 h-[180px]">
            <div className="relative h-[120px] w-[120px]">
-              <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <div className="text-3xl font-bold">{kpis.edad.avg.toFixed(1)}</div>
-              </div>
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
@@ -79,6 +76,9 @@ export function KpiCards({ kpis }: KpiProps) {
                   </Pie>
                 </PieChart>
               </ResponsiveContainer>
+              <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
+                <div className="text-3xl font-bold">{kpis.edad.avg.toFixed(1)}</div>
+              </div>
             </div>
             <p className="text-xs text-muted-foreground mt-2">Rango: {kpis.edad.range}</p>
         </CardContent>
@@ -90,9 +90,6 @@ export function KpiCards({ kpis }: KpiProps) {
         </CardHeader>
         <CardContent className="flex flex-col items-center justify-center pt-2 h-[180px]">
            <div className="relative h-[120px] w-[120px]">
-              <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <div className="text-3xl font-bold">${formatCurrency(kpis.ingreso.avg)}</div>
-              </div>
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
@@ -112,6 +109,9 @@ export function KpiCards({ kpis }: KpiProps) {
                   </Pie>
                 </PieChart>
               </ResponsiveContainer>
+               <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
+                <div className="text-3xl font-bold">${formatCurrency(kpis.ingreso.avg)}</div>
+              </div>
             </div>
             <p className="text-xs text-muted-foreground mt-2">Rango: {kpis.ingreso.range}</p>
         </CardContent>
@@ -123,9 +123,6 @@ export function KpiCards({ kpis }: KpiProps) {
         </CardHeader>
         <CardContent className="flex flex-col items-center justify-center pt-2 h-[180px]">
            <div className="relative h-[120px] w-[120px]">
-              <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <div className="text-3xl font-bold">${formatCurrency(kpis.saldo.avg)}</div>
-              </div>
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
@@ -145,6 +142,9 @@ export function KpiCards({ kpis }: KpiProps) {
                   </Pie>
                 </PieChart>
               </ResponsiveContainer>
+              <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
+                <div className="text-3xl font-bold">${formatCurrency(kpis.saldo.avg)}</div>
+              </div>
             </div>
             <p className="text-xs text-muted-foreground mt-2">Rango: {kpis.saldo.range}</p>
         </CardContent>
