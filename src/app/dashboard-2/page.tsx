@@ -46,9 +46,23 @@ export default function Dashboard2Page() {
     if (value === 'all') {
       setFilteredData(initialData);
     } else {
-      // Simulate filtering by reducing data randomly
-      const randomFactor = 0.5 + Math.random() * 0.4; // between 0.5 and 0.9
+      // Simulate filtering by creating a new random distribution
+      const randomFactor = 0.5 + Math.random() * 0.4;
       
+      const newClusterValues = initialData.cluster.map(() => Math.random());
+      const newClusterTotal = newClusterValues.reduce((sum, v) => sum + v, 0);
+      const newClusterData = initialData.cluster.map((c, i) => ({
+        ...c,
+        value: Math.floor((newClusterValues[i] / newClusterTotal) * initialData.coberturaBase * randomFactor)
+      }));
+      
+      const newSituacionValues = initialData.situacionLaboral.map(() => Math.random());
+      const newSituacionTotal = newSituacionValues.reduce((sum, v) => sum + v, 0);
+      const newSituacionData = initialData.situacionLaboral.map((s, i) => ({
+        ...s,
+        value: Math.floor((newSituacionValues[i] / newSituacionTotal) * initialData.coberturaBase * randomFactor)
+      }));
+
       const newFilteredData = {
         kpis: {
             edad: { ...initialData.kpis.edad, avg: 25 + Math.random() * (80 - 25) },
@@ -57,8 +71,8 @@ export default function Dashboard2Page() {
         },
         coberturaBase: Math.floor(initialData.coberturaBase * randomFactor),
         entidades: initialData.entidades.map(e => ({ ...e, value: Math.floor(e.value * randomFactor) })),
-        cluster: initialData.cluster.map(c => ({ ...c, value: Math.floor(c.value * randomFactor) })),
-        situacionLaboral: initialData.situacionLaboral.map(s => ({ ...s, value: Math.floor(s.value * randomFactor) })),
+        cluster: newClusterData,
+        situacionLaboral: newSituacionData,
       };
       setFilteredData(newFilteredData);
     }
