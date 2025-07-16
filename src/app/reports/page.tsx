@@ -57,6 +57,15 @@ const createTable = (doc: jsPDF, startX: number, startY: number, headers: string
     return currentY;
 }
 
+// Helpers para generar datos aleatorios
+const getRandomNumber = (min: number, max: number, decimals: number = 0) => {
+    return (Math.random() * (max - min) + min).toFixed(decimals);
+};
+
+const formatCurrency = (value: number) => {
+    return `$${value.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+}
+
 
 export default function ReportsPage() {
   const powerBiRef = React.useRef<{ getIframe: () => HTMLIFrameElement | null }>(null);
@@ -94,16 +103,16 @@ export default function ReportsPage() {
       doc.setFont("helvetica", "normal");
       doc.text(new Date().toLocaleDateString('es-ES', { dateStyle: 'long' }), 105, 28, { align: "center" });
 
-      // Sección de Métricas Clave
+      // Sección de Métricas Clave (Datos Aleatorios)
       doc.setFontSize(16);
       doc.setFont("helvetica", "bold");
       doc.text("1. Resumen de Métricas Clave", 14, 45);
       doc.setFontSize(12);
       doc.setFont("helvetica", "normal");
-      doc.text("- Ingresos Totales: $125,450", 20, 55);
-      doc.text("- Tasa de Conversión: 3.5%", 20, 62);
-      doc.text("- Valor Promedio de Orden (AOV): $85.60", 20, 69);
-      doc.text("- Crecimiento Mensual: 15%", 20, 76);
+      doc.text(`- Ingresos Totales: ${formatCurrency(parseFloat(getRandomNumber(100000, 250000)))}`, 20, 55);
+      doc.text(`- Tasa de Conversión: ${getRandomNumber(1.5, 5, 1)}%`, 20, 62);
+      doc.text(`- Valor Promedio de Orden (AOV): ${formatCurrency(parseFloat(getRandomNumber(70, 150)))}`, 20, 69);
+      doc.text(`- Crecimiento Mensual: ${getRandomNumber(5, 25, 0)}%`, 20, 76);
 
       // Sección de Análisis IA
       doc.setFontSize(16);
@@ -114,16 +123,16 @@ export default function ReportsPage() {
       const rationaleLines = doc.splitTextToSize(aiResult.rationale, 175);
       doc.text(rationaleLines, 20, 105);
 
-      // Sección de Tabla de datos
+      // Sección de Tabla de datos (Datos Aleatorios)
       doc.setFontSize(16);
       doc.setFont("helvetica", "bold");
       doc.text("3. Detalle de Ventas por Región", 14, 150);
       const tableHeaders = ["Región", "Ventas", "Crecimiento"];
       const tableData = [
-          ["Norte", "$45,000", "20%"],
-          ["Sur", "$35,500", "12%"],
-          ["Centro", "$25,150", "8%"],
-          ["Oeste", "$19,800", "18%"],
+          ["Norte", formatCurrency(parseFloat(getRandomNumber(40000, 60000))), `${getRandomNumber(10, 25, 0)}%`],
+          ["Sur", formatCurrency(parseFloat(getRandomNumber(30000, 50000))), `${getRandomNumber(5, 15, 0)}%`],
+          ["Centro", formatCurrency(parseFloat(getRandomNumber(20000, 40000))), `${getRandomNumber(2, 10, 0)}%`],
+          ["Oeste", formatCurrency(parseFloat(getRandomNumber(15000, 35000))), `${getRandomNumber(8, 20, 0)}%`],
       ];
       createTable(doc, 20, 160, tableHeaders, tableData);
 
