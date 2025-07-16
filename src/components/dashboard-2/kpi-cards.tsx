@@ -4,10 +4,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { TrendingUp, Users, DollarSign } from 'lucide-react'
 import {
-  RadialBarChart,
-  RadialBar,
-  PolarAngleAxis,
-  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+  ResponsiveContainer
 } from "recharts"
 
 interface KpiProps {
@@ -26,7 +26,7 @@ const formatCurrency = (value: number) => {
 }
 
 const parseRange = (range: string) => {
-    const parts = range.replace('k', '000').split(' a ');
+    const parts = range.replace(/k/g, '000').split(' a ');
     return { min: parseFloat(parts[0]), max: parseFloat(parts[1]) };
 }
 
@@ -35,10 +35,18 @@ export function KpiCards({ kpis }: KpiProps) {
     const edadRange = parseRange(kpis.edad.range);
     const ingresoRange = parseRange(kpis.ingreso.range);
     const saldoRange = parseRange(kpis.saldo.range);
+
+    const createChartData = (value: number, range: { min: number, max: number }) => {
+        const percentage = ((value - range.min) / (range.max - range.min)) * 100;
+        return [
+            { name: 'value', value: percentage },
+            { name: 'background', value: 100 - percentage },
+        ];
+    }
   
-    const edadChartData = [{ name: 'edad', value: kpis.edad.avg, fill: 'hsl(var(--chart-1))' }];
-    const ingresoChartData = [{ name: 'ingreso', value: kpis.ingreso.avg, fill: 'hsl(var(--chart-2))' }];
-    const saldoChartData = [{ name: 'saldo', value: kpis.saldo.avg, fill: 'hsl(var(--chart-4))' }];
+    const edadChartData = createChartData(kpis.edad.avg, edadRange);
+    const ingresoChartData = createChartData(kpis.ingreso.avg, ingresoRange);
+    const saldoChartData = createChartData(kpis.saldo.avg, saldoRange);
 
   return (
     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -54,10 +62,23 @@ export function KpiCards({ kpis }: KpiProps) {
             </div>
             <div className="h-[60px] w-[60px]">
                 <ResponsiveContainer width="100%" height="100%">
-                    <RadialBarChart innerRadius="70%" outerRadius="100%" data={edadChartData} startAngle={90} endAngle={-270}>
-                        <PolarAngleAxis type="number" domain={[edadRange.min, edadRange.max]} angleAxisId={0} tick={false} />
-                        <RadialBar background dataKey="value" angleAxisId={0} />
-                    </RadialBarChart>
+                    <PieChart>
+                        <Pie
+                            data={edadChartData}
+                            dataKey="value"
+                            startAngle={90}
+                            endAngle={-270}
+                            innerRadius="70%"
+                            outerRadius="100%"
+                            cy="50%"
+                            cx="50%"
+                            paddingAngle={0}
+                            stroke="none"
+                        >
+                            <Cell fill="hsl(var(--chart-1))" />
+                            <Cell fill="hsl(var(--muted))" />
+                        </Pie>
+                    </PieChart>
                 </ResponsiveContainer>
             </div>
         </CardContent>
@@ -74,10 +95,23 @@ export function KpiCards({ kpis }: KpiProps) {
           </div>
           <div className="h-[60px] w-[60px]">
                 <ResponsiveContainer width="100%" height="100%">
-                    <RadialBarChart innerRadius="70%" outerRadius="100%" data={ingresoChartData} startAngle={90} endAngle={-270}>
-                        <PolarAngleAxis type="number" domain={[ingresoRange.min, ingresoRange.max]} angleAxisId={0} tick={false} />
-                        <RadialBar background dataKey="value" angleAxisId={0} />
-                    </RadialBarChart>
+                   <PieChart>
+                        <Pie
+                            data={ingresoChartData}
+                            dataKey="value"
+                            startAngle={90}
+                            endAngle={-270}
+                            innerRadius="70%"
+                            outerRadius="100%"
+                            cy="50%"
+                            cx="50%"
+                            paddingAngle={0}
+                            stroke="none"
+                        >
+                            <Cell fill="hsl(var(--chart-2))" />
+                            <Cell fill="hsl(var(--muted))" />
+                        </Pie>
+                    </PieChart>
                 </ResponsiveContainer>
             </div>
         </CardContent>
@@ -94,10 +128,23 @@ export function KpiCards({ kpis }: KpiProps) {
           </div>
            <div className="h-[60px] w-[60px]">
                 <ResponsiveContainer width="100%" height="100%">
-                    <RadialBarChart innerRadius="70%" outerRadius="100%" data={saldoChartData} startAngle={90} endAngle={-270}>
-                        <PolarAngleAxis type="number" domain={[saldoRange.min, saldoRange.max]} angleAxisId={0} tick={false} />
-                        <RadialBar background dataKey="value" angleAxisId={0} />
-                    </RadialBarChart>
+                    <PieChart>
+                        <Pie
+                            data={saldoChartData}
+                            dataKey="value"
+                            startAngle={90}
+                            endAngle={-270}
+                            innerRadius="70%"
+                            outerRadius="100%"
+                            cy="50%"
+                            cx="50%"
+                            paddingAngle={0}
+                            stroke="none"
+                        >
+                            <Cell fill="hsl(var(--chart-4))" />
+                            <Cell fill="hsl(var(--muted))" />
+                        </Pie>
+                    </PieChart>
                 </ResponsiveContainer>
             </div>
         </CardContent>
