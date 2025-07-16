@@ -70,6 +70,7 @@ export function KpiCards({ kpis }: KpiProps) {
                     cx="50%"
                     paddingAngle={0}
                     stroke="none"
+                    isAnimationActive={true}
                   >
                     <Cell fill="hsl(var(--chart-1))" />
                     <Cell fill="hsl(var(--muted))" />
@@ -103,6 +104,7 @@ export function KpiCards({ kpis }: KpiProps) {
                     cx="50%"
                     paddingAngle={0}
                     stroke="none"
+                    isAnimationActive={true}
                   >
                     <Cell fill="hsl(var(--chart-2))" />
                     <Cell fill="hsl(var(--muted))" />
@@ -136,6 +138,7 @@ export function KpiCards({ kpis }: KpiProps) {
                     cx="50%"
                     paddingAngle={0}
                     stroke="none"
+                    isAnimationActive={true}
                   >
                     <Cell fill="hsl(var(--chart-4))" />
                     <Cell fill="hsl(var(--muted))" />
