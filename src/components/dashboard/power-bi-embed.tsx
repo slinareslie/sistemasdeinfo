@@ -1,3 +1,6 @@
+"use client";
+
+import * as React from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
@@ -8,7 +11,13 @@ import { Info } from "lucide-react"
 // ve a Archivo > Insertar informe > Publicar en la web (público) o Insertar.
 const POWER_BI_EMBED_URL = "https://app.powerbi.com/view?r=eyJrIjoiNjI0YzBmZWEtZDljOC00ODEyLThkN2UtMjM3YTI4MjMwYmQzIiwidCI6ImNhMTM5MDUwLWNmYjQtNDUyNy05YmMzLTcyOWZiNTRhYzEzOCJ9";
 
-export default function PowerBiEmbed() {
+const PowerBiEmbed = React.forwardRef((props, ref) => {
+  const iframeRef = React.useRef<HTMLIFrameElement>(null);
+
+  React.useImperativeHandle(ref, () => ({
+    getIframe: () => iframeRef.current,
+  }));
+
   return (
     <Card className="h-full shadow-lg transition-all hover:shadow-xl">
       <CardHeader>
@@ -17,8 +26,9 @@ export default function PowerBiEmbed() {
       </CardHeader>
       <CardContent>
         {POWER_BI_EMBED_URL ? (
-          <AspectRatio ratio={16 / 9} className="bg-muted rounded-md">
+          <AspectRatio ratio={16 / 9} className="bg-muted rounded-md h-full">
             <iframe
+              ref={iframeRef}
               title="Power BI Dashboard"
               className="w-full h-full rounded-md border"
               src={POWER_BI_EMBED_URL}
@@ -39,4 +49,8 @@ export default function PowerBiEmbed() {
       </CardContent>
     </Card>
   )
-}
+});
+
+PowerBiEmbed.displayName = "PowerBiEmbed";
+
+export default PowerBiEmbed;
