@@ -57,7 +57,7 @@ function MainNav() {
        <SidebarMenuItem>
         <SidebarMenuButton href="/dashboard-2" isActive={pathname === '/dashboard-2'}>
           <LayoutDashboard />
-          <span className="truncate">Dashboard 2</span>
+          <span className="truncate">Dashboard Analítico</span>
         </SidebarMenuButton>
       </SidebarMenuItem>
       <SidebarMenuItem>
