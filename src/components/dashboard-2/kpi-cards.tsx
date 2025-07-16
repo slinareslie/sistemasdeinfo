@@ -55,7 +55,7 @@ export function KpiCards({ kpis }: KpiProps) {
           <CardTitle className="text-sm font-medium">Promedio de Edad</CardTitle>
           <Users className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
-        <CardContent className="flex flex-col items-center justify-center pt-2">
+        <CardContent className="flex flex-col items-center justify-center pt-2 h-[180px]">
            <div className="relative h-[120px] w-[120px]">
               <div className="absolute inset-0 flex flex-col items-center justify-center">
                 <div className="text-3xl font-bold">{kpis.edad.avg.toFixed(1)}</div>
@@ -88,7 +88,7 @@ export function KpiCards({ kpis }: KpiProps) {
           <CardTitle className="text-sm font-medium">Promedio de Ingreso</CardTitle>
           <DollarSign className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
-        <CardContent className="flex flex-col items-center justify-center pt-2">
+        <CardContent className="flex flex-col items-center justify-center pt-2 h-[180px]">
            <div className="relative h-[120px] w-[120px]">
               <div className="absolute inset-0 flex flex-col items-center justify-center">
                 <div className="text-3xl font-bold">${formatCurrency(kpis.ingreso.avg)}</div>
@@ -121,7 +121,7 @@ export function KpiCards({ kpis }: KpiProps) {
           <CardTitle className="text-sm font-medium">Saldo Total en SSFF</CardTitle>
           <TrendingUp className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
-        <CardContent className="flex flex-col items-center justify-center pt-2">
+        <CardContent className="flex flex-col items-center justify-center pt-2 h-[180px]">
            <div className="relative h-[120px] w-[120px]">
               <div className="absolute inset-0 flex flex-col items-center justify-center">
                 <div className="text-3xl font-bold">${formatCurrency(kpis.saldo.avg)}</div>
