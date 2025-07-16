@@ -54,6 +54,12 @@ function MainNav() {
           <span className="truncate">Dashboard</span>
         </SidebarMenuButton>
       </SidebarMenuItem>
+       <SidebarMenuItem>
+        <SidebarMenuButton href="/dashboard-2" isActive={pathname === '/dashboard-2'}>
+          <LayoutDashboard />
+          <span className="truncate">Dashboard 2</span>
+        </SidebarMenuButton>
+      </SidebarMenuItem>
       <SidebarMenuItem>
         <SidebarMenuButton href="/data-sources" isActive={pathname === '/data-sources'}>
           <DatabaseZap />
