@@ -9,18 +9,28 @@ import { Badge } from "@/components/ui/badge";
 
 const users = [
   {
-    name: "Sofia Diaz",
-    email: "sofia.diaz@example.com",
+    name: "Alejandro Quispe",
+    email: "alejandro.quispe@example.com",
     role: "admin",
   },
   {
-    name: "Carlos Gomez",
-    email: "carlos.gomez@example.com",
+    name: "Maria Flores",
+    email: "maria.flores@example.com",
     role: "viewer",
   },
    {
-    name: "Ana Lopez",
-    email: "ana.lopez@example.com",
+    name: "Javier Mendoza",
+    email: "javier.mendoza@example.com",
+    role: "editor",
+  },
+  {
+    name: "Luciana Rodriguez",
+    email: "luciana.rodriguez@example.com",
+    role: "viewer",
+  },
+   {
+    name: "Diego Vargas",
+    email: "diego.vargas@example.com",
     role: "viewer",
   },
 ];
@@ -58,7 +68,7 @@ export default function UserManagementPage() {
                   <TableCell className="font-medium">{user.name}</TableCell>
                   <TableCell>{user.email}</TableCell>
                   <TableCell>
-                    <Badge variant={user.role === 'admin' ? 'default' : 'secondary'}>{user.role}</Badge>
+                    <Badge variant={user.role === 'admin' ? 'default' : user.role === 'editor' ? 'secondary' : 'outline'}>{user.role}</Badge>
                   </TableCell>
                   <TableCell className="text-right space-x-2">
                     <Button variant="outline" size="icon">
