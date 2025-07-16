@@ -10,6 +10,54 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { suggestMetrics, type SuggestMetricsOutput } from "@/ai/flows/suggest-metrics";
 import { useToast } from "@/hooks/use-toast";
 
+// Helper para dibujar la tabla
+const createTable = (doc: jsPDF, startX: number, startY: number, headers: string[], data: (string|number)[][]) => {
+    const headStyles = {
+        fillColor: [63, 81, 181],
+        textColor: 255,
+        fontStyle: 'bold'
+    };
+    const bodyStyles = {
+        fillColor: [245, 245, 245]
+    };
+    const alternateRowStyles = {
+        fillColor: [255, 255, 255]
+    };
+
+    const columnWidths = [60, 50, 50];
+    const rowHeight = 10;
+    let currentY = startY;
+
+    // Draw header
+    doc.setFontSize(10);
+    doc.setFillColor(...(headStyles.fillColor as [number, number, number]));
+    doc.setTextColor(headStyles.textColor);
+    doc.setFont('helvetica', 'bold');
+    doc.rect(startX, currentY, columnWidths.reduce((a, b) => a + b, 0), rowHeight, 'F');
+
+    headers.forEach((header, i) => {
+        doc.text(header, startX + (columnWidths.slice(0, i).reduce((a, b) => a + b, 0)) + 5, currentY + rowHeight / 2, { verticalAlign: 'middle' });
+    });
+    currentY += rowHeight;
+
+    // Draw body
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(0);
+
+    data.forEach((row, rowIndex) => {
+        const fillColor = rowIndex % 2 === 0 ? bodyStyles.fillColor : alternateRowStyles.fillColor;
+        doc.setFillColor(...(fillColor as [number, number, number]));
+        doc.rect(startX, currentY, columnWidths.reduce((a, b) => a + b, 0), rowHeight, 'F');
+        row.forEach((cell, colIndex) => {
+            doc.text(String(cell), startX + (columnWidths.slice(0, colIndex).reduce((a, b) => a + b, 0)) + 5, currentY + rowHeight / 2, { verticalAlign: 'middle' });
+        });
+        currentY += rowHeight;
+    });
+
+    return currentY;
+}
+
+
 export default function ReportsPage() {
   const powerBiRef = React.useRef<{ getIframe: () => HTMLIFrameElement | null }>(null);
   const [isGenerating, setIsGenerating] = React.useState(false);
@@ -70,16 +118,14 @@ export default function ReportsPage() {
       doc.setFontSize(16);
       doc.setFont("helvetica", "bold");
       doc.text("3. Detalle de Ventas por Región", 14, 150);
-      doc.table(20, 160, [
-          { region: "Norte", ventas: "$45,000", crecimiento: "20%" },
-          { region: "Sur", ventas: "$35,500", crecimiento: "12%" },
-          { region: "Centro", ventas: "$25,150", crecimiento: "8%" },
-          { region: "Oeste", ventas: "$19,800", crecimiento: "18%" },
-      ], {
-          headers: ["Región", "Ventas", "Crecimiento"],
-          autoSize: true,
-      });
-
+      const tableHeaders = ["Región", "Ventas", "Crecimiento"];
+      const tableData = [
+          ["Norte", "$45,000", "20%"],
+          ["Sur", "$35,500", "12%"],
+          ["Centro", "$25,150", "8%"],
+          ["Oeste", "$19,800", "18%"],
+      ];
+      createTable(doc, 20, 160, tableHeaders, tableData);
 
       doc.save("Reporte_Gerencial_InsightFlow.pdf");
     } catch (error) {
