@@ -55,9 +55,9 @@ export function KpiCards({ kpis }: KpiProps) {
           <CardTitle className="text-sm font-medium">Promedio de Edad</CardTitle>
           <Users className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
-        <CardContent className="flex justify-center items-center h-[120px] relative">
+        <CardContent className="flex justify-center items-center h-[140px] relative">
           <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <div className="text-2xl font-bold">{kpis.edad.avg.toFixed(1)}</div>
+            <div className="text-3xl font-bold">{kpis.edad.avg.toFixed(1)}</div>
             <p className="text-xs text-muted-foreground">Rango: {kpis.edad.range}</p>
           </div>
           <div className="h-full w-full">
@@ -88,9 +88,9 @@ export function KpiCards({ kpis }: KpiProps) {
           <CardTitle className="text-sm font-medium">Promedio de Ingreso</CardTitle>
           <DollarSign className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
-        <CardContent className="flex justify-center items-center h-[120px] relative">
+        <CardContent className="flex justify-center items-center h-[140px] relative">
           <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <div className="text-2xl font-bold">${formatCurrency(kpis.ingreso.avg)}</div>
+            <div className="text-3xl font-bold">${formatCurrency(kpis.ingreso.avg)}</div>
             <p className="text-xs text-muted-foreground">Rango: {kpis.ingreso.range}</p>
           </div>
           <div className="h-full w-full">
@@ -121,9 +121,9 @@ export function KpiCards({ kpis }: KpiProps) {
           <CardTitle className="text-sm font-medium">Saldo Total en SSFF</CardTitle>
           <TrendingUp className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
-        <CardContent className="flex justify-center items-center h-[120px] relative">
+        <CardContent className="flex justify-center items-center h-[140px] relative">
           <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <div className="text-2xl font-bold">${formatCurrency(kpis.saldo.avg)}</div>
+            <div className="text-3xl font-bold">${formatCurrency(kpis.saldo.avg)}</div>
             <p className="text-xs text-muted-foreground">Rango: {kpis.saldo.range}</p>
           </div>
           <div className="h-full w-full">
