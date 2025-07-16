@@ -24,10 +24,10 @@ const initialData = {
     { name: '6', value: 38 }, { name: '7', value: 10 }, { name: '8', value: 1 }
   ],
   cluster: [
-    { name: 'Cluster_2', value: 1219, percentage: 50.79, fill: 'hsl(var(--chart-1))' },
-    { name: 'Cluster_0', value: 779, percentage: 32.46, fill: 'hsl(var(--chart-2))' },
-    { name: 'Cluster_3', value: 398, percentage: 16.58, fill: 'hsl(var(--chart-3))' },
-    { name: 'Cluster_1', value: 2, percentage: 0.12, fill: 'hsl(var(--chart-4))' },
+    { name: 'Conservador Estable', value: 1219, percentage: 50.79, fill: 'hsl(var(--chart-1))' },
+    { name: 'Alto Potencial', value: 779, percentage: 32.46, fill: 'hsl(var(--chart-2))' },
+    { name: 'Nuevo/Ocasional', value: 398, percentage: 16.58, fill: 'hsl(var(--chart-3))' },
+    { name: 'VIP', value: 2, percentage: 0.12, fill: 'hsl(var(--chart-4))' },
   ],
   situacionLaboral: [
     { name: 'DEPENDIENTE', value: 601, percentage: 25.04, fill: 'hsl(var(--chart-1))' },
@@ -78,10 +78,10 @@ export default function Dashboard2Page() {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="all">Todos</SelectItem>
-                    <SelectItem value="cluster_0">Cluster 0</SelectItem>
-                    <SelectItem value="cluster_1">Cluster 1</SelectItem>
-                    <SelectItem value="cluster_2">Cluster 2</SelectItem>
-                    <SelectItem value="cluster_3">Cluster 3</SelectItem>
+                    <SelectItem value="conservador">Conservador Estable</SelectItem>
+                    <SelectItem value="potencial">Alto Potencial</SelectItem>
+                    <SelectItem value="nuevo">Nuevo/Ocasional</SelectItem>
+                    <SelectItem value="vip">VIP</SelectItem>
                     <SelectItem value="dependiente">Dependiente</SelectItem>
                     <SelectItem value="independiente">Independiente</SelectItem>
                   </SelectContent>
