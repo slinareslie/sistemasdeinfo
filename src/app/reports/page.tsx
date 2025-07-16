@@ -96,7 +96,7 @@ export default function ReportsPage() {
       // Título
       doc.setFontSize(22);
       doc.setFont("helvetica", "bold");
-      doc.text("Reporte Gerencial - InsightFlow", 105, 20, { align: "center" });
+      doc.text("Reporte Gerencial - FenixSeguros", 105, 20, { align: "center" });
 
       // Fecha
       doc.setFontSize(12);
@@ -136,7 +136,7 @@ export default function ReportsPage() {
       ];
       createTable(doc, 20, 160, tableHeaders, tableData);
 
-      doc.save("Reporte_Gerencial_InsightFlow.pdf");
+      doc.save("Reporte_Gerencial_FenixSeguros.pdf");
     } catch (error) {
         console.error("Error al generar el reporte:", error);
         toast({

@@ -158,7 +158,7 @@ export function DashboardLayout({ children, title }: { children: React.ReactNode
           <SidebarHeader>
             <div className="flex items-center gap-2 p-2">
               <LineChart className="h-8 w-8 text-primary" />
-              <span className="text-xl font-semibold">InsightFlow</span>
+              <span className="text-xl font-semibold">FenixSeguros</span>
             </div>
           </SidebarHeader>
           <SidebarContent>

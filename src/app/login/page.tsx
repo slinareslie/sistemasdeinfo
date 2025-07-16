@@ -19,7 +19,7 @@ export default function LoginPage() {
     <div className="flex items-center justify-center min-h-screen bg-background p-4">
       <Card className="w-full max-w-sm shadow-2xl">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-3xl font-bold tracking-tight text-center font-headline text-primary">InsightFlow</CardTitle>
+          <CardTitle className="text-3xl font-bold tracking-tight text-center font-headline text-primary">FenixSeguros</CardTitle>
           <CardDescription className="text-center">Enter your credentials to access your dashboard</CardDescription>
         </CardHeader>
         <form onSubmit={handleSignIn}>
